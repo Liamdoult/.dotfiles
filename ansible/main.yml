@@ -1,5 +1,11 @@
-- name: Install Management Tools
+- name: Setup Management Tools
   include: management.yml
 
-- name: Install Zsh
+- name: Setup Zsh
   include: zsh.yml
+
+- name: Setup Python 
+  include: python.yml
+
+- name: Setup Go 
+  include: golang.yml
