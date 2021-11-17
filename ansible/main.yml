@@ -1,0 +1,5 @@
+- name: Install Management Tools
+  include: management.yml
+
+- name: Install Zsh
+  include: zsh.yml
