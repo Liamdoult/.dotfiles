@@ -9,3 +9,6 @@
 
 - name: Setup Go 
   include: golang.yml
+
+- name: Setup nvim 
+  include: nvim.yml
