@@ -41,6 +41,11 @@
         target: install
         params:
 
+    - name: create config path
+      file:
+        path: ~/.config/nvim
+        state: directory
+
     - name: copy .nvim
       ansible.builtin.copy:
         src: ../nvim/init.vim
