@@ -8,10 +8,31 @@
         name:
          - zsh
 
+    - name: install oh-my-zsh
+      when: not 'ZSH' in ansible_env 
+      shell: sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+      register: result
+
+    - name: remove .zshrc
+      ansible.builtin.file:
+        state: absent
+        path: ~/.zshrc
+
+    - name: remove .p10k.zsh
+      ansible.builtin.file:
+        state: absent
+        path: ~/.p10k.zsh
+
     - name: symbolic link .zshrc
       file:
         src: "{{ playbook_dir }}/.zshrc"
         dest: "~/.zshrc"
+        state: link
+
+    - name: symbolic link .p10k.zsh
+      file:
+        src: "{{ playbook_dir }}/.p10k.zsh"
+        dest: "~/.p10k.zsh"
         state: link
 
     - name: set zsh as default 
@@ -20,4 +41,7 @@
       shell: chsh -s /bin/zsh liam
       register: result
 
-
+    - name: install p10k theme
+      ansible.builtin.git:
+        repo: https://github.com/romkatv/powerlevel10k.git
+        dest: ~/.oh-my-zsh/custom/themes/powerlevel10k
