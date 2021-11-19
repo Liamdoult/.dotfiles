@@ -112,6 +112,7 @@ alias vim=nvim
 alias psr="powershell.exe -File " 
 alias psc="powershell.exe -Command " 
 alias zshrl="source ~/.zshrc"
+alias zshrc="vim ~/.zshrc"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
