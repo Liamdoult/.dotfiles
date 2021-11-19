@@ -2,7 +2,7 @@
   include: management.yml
 
 - name: Setup Zsh
-  include: zsh.yml
+  include: zsh/zsh.yml
 
 - name: Setup Python 
   include: python.yml

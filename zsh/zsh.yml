@@ -25,13 +25,13 @@
 
     - name: symbolic link .zshrc
       file:
-        src: "{{ playbook_dir }}/.zshrc"
+        src: "{{ playbook_dir }}/zshrc"
         dest: "~/.zshrc"
         state: link
 
     - name: symbolic link .p10k.zsh
       file:
-        src: "{{ playbook_dir }}/.p10k.zsh"
+        src: "{{ playbook_dir }}/p10k.zsh"
         dest: "~/.p10k.zsh"
         state: link
 
