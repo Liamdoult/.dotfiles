@@ -20,6 +20,7 @@
         update_cache: true
         force_apt_get: true
         name:
+        - mono-complete
         - apt-transport-https
 
     - name: install packages
