@@ -1,0 +1,35 @@
+- hosts: localhost
+  tasks:
+    - name: Download microsoft package ref
+      get_url:
+        url: https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb
+        force: true
+        dest: /tmp/
+
+    - name: install repository 
+      become: true
+      become_user: root
+      shell: dpkg -i /tmp/packages-microsoft-prod.deb
+      register: result
+
+    - name: install pre-req 
+      become: true
+      become_user: root
+      apt:
+        state: present
+        update_cache: true
+        force_apt_get: true
+        name:
+        - apt-transport-https
+
+    - name: install packages
+      become: true
+      become_user: root
+      apt:
+        state: present
+        update_cache: true
+        force_apt_get: true
+        name:
+        - dotnet-sdk-6.0
+        - aspnetcore-runtime-6.0
+        
