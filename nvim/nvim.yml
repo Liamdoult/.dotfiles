@@ -19,7 +19,6 @@
          - curl
          - doxygen
 
-
     - name: clone neovim
       ansible.builtin.git:
         repo: git@github.com:neovim/neovim.git
@@ -46,10 +45,16 @@
         path: ~/.config/nvim
         state: directory
 
-    - name: copy .nvim
-      ansible.builtin.copy:
-        src: ../nvim/init.vim
+    - name: remove vimrc 
+      ansible.builtin.file:
+        state: absent
+        path: ~/.config/nvim/init.vim
+
+    - name: symbolic link vimrc 
+      file:
+        src: "{{ playbook_dir }}/vimrc" 
         dest: ~/.config/nvim/init.vim
+        state: link
         backup: yes
 
     - name: setup vimplug

@@ -11,4 +11,4 @@
   include: golang.yml
 
 - name: Setup nvim 
-  include: nvim.yml
+  include: nvim/nvim.yml
