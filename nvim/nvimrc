@@ -45,5 +45,5 @@ set ts=2 sw=2
 set number
 " highlight ColorColumn ctermbg=red
 " set cc=80
-nnoremap <Leader><CR> :so ~\nvim\init.vim<CR>
-nnoremap <Leader>ec :edit ~\nvim\init.vim<CR>
+nnoremap <Leader><CR> :so ~/.config/nvim/init.vim<CR>
+nnoremap <Leader>ec :edit ~/.config/nvim/init.vim<CR>

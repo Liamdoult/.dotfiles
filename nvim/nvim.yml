@@ -52,7 +52,7 @@
 
     - name: symbolic link vimrc 
       file:
-        src: "{{ playbook_dir }}/vimrc" 
+        src: "{{ playbook_dir }}/nvimrc" 
         dest: ~/.config/nvim/init.vim
         state: link
         backup: yes
