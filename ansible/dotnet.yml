@@ -32,4 +32,12 @@
         name:
         - dotnet-sdk-6.0
         - aspnetcore-runtime-6.0
-        
+
+    - name: download nuget cred provider plugin 
+      get_url:
+        url: https://aka.ms/install-artifacts-credprovider.sh
+        dest: /tmp/
+
+    - name: install nuget cred provider plugin
+      shell: /tmp/install-artificates-credprovider.sh
+      register: result
