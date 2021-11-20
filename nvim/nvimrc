@@ -28,7 +28,7 @@ nnoremap <leader>l :wincmd l<CR>
 nnoremap <C-n> :NERDTreeToggle<CR>
 
 " Ctrl + p Configuration
-let g:ctrlp_map = "CTRL-p"
+let g:ctrlp_map = "<leader>p"
 
 " Other
 set ts=2 sw=2
