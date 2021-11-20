@@ -1,0 +1,5 @@
+- hosts: localhost
+  tasks:
+    - name: configure git editor 
+      shell: git config --global core.editor "vim"
+      register: result
