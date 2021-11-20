@@ -1,0 +1,37 @@
+- hosts: localhost
+  tasks:
+  - name: clone bootstrap 
+    ansible.builtin.git:
+      repo: https://go.googlesource.com/go
+      dest: /tmp/goroot-bootstrap
+      version: release-branch.go1.4
+
+  - stat: 
+      path: /tmp/goroot-bootstrap/bin/go
+    register: bootstrap 
+
+  - name: build bootstrap
+    shell: cd /tmp/goroot-bootstrap/src && ./make.bash 
+    environment:
+      CGO_ENABLED: 0
+    register: result
+    when: bootstrap.stat.exists == false
+
+  - name: clone 
+    ansible.builtin.git:
+      repo: https://go.googlesource.com/go
+      dest: ~/go
+      version: release-branch.go1.17
+
+  - stat: 
+      path: ~/go/bin/go
+    register: built 
+
+  - name: build 
+    shell: cd ~/go/src && GOROOT_BOOTSTRAP=/tmp/goroot-bootstrap CGO_ENABLED=1 ./make.bash 
+    register: result
+    when: built.stat.exists == false
+
+  - name: get user home
+    shell: echo $HOME
+    register: usrhome
