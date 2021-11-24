@@ -18,6 +18,7 @@
          - unzip
          - curl
          - doxygen
+         - ripgrep
 
     - name: clone neovim
       ansible.builtin.git:
