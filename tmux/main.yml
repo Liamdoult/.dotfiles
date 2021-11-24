@@ -1,0 +1,38 @@
+- hosts: localhost
+  tasks:
+    - name: install zsh 
+      become: true
+      become_user: root
+      apt:
+        state: present
+        name:
+         - tmux 
+
+    - name: create tmux folder
+      file:
+        path: ~/.tmux/
+        state: directory 
+
+    - name: remove tmux.conf
+      ansible.builtin.file:
+        state: absent
+        path: ~/.tmux.conf
+
+    - name: symbolic link .zshrc
+      file:
+        src: "{{ playbook_dir }}/tmux.conf"
+        dest: "~/.tmux.conf"
+        state: link
+
+    - name: symbolic link tmux scripts 
+      file:
+        src: "{{ playbook_dir }}/scripts"
+        dest: "~/.tmux/scripts"
+        state: link
+
+    - name: install plugin manager
+      ansible.builtin.git:
+        repo: https://github.com/tmux-plugins/tpm
+        dest: ~/.tmux/plugins/tpm
+        force: true
+

@@ -115,6 +115,10 @@ alias zshrl="source ~/.zshrc"
 alias zshrc="vim ~/.zshrc"
 alias ex="explorer.exe"
 
+# Tmux shortcuts
+alias ts="sh ~/.tmux/scripts/startDev.sh"
+alias tsk="tmux kill-session"
+
 export GOROOT=~/go
 export GOPATH=$HOME/.goinstalls
 export PATH="$PATH:$GOROOT/bin"
@@ -122,3 +126,6 @@ export GO111MODULE=on
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# To customize prompt, run `p10k configure` or edit /mnt/c/Users/liamdoult/.dotfiles/zsh/p10k.zsh.
+[[ ! -f /mnt/c/Users/liamdoult/.dotfiles/zsh/p10k.zsh ]] || source /mnt/c/Users/liamdoult/.dotfiles/zsh/p10k.zsh

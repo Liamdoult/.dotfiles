@@ -6,7 +6,8 @@
       apt:
         state: present
         name:
-         - cmake
-         - yamllint
-         - ansible-lint
-         - htop
+        - cmake
+        - yamllint
+        - ansible-lint
+        - htop
+        - tmux
