@@ -1,0 +1,17 @@
+- hosts: localhost
+  vars:
+    # Select font name from: https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts
+    # Name is case sensitive
+    font_name: "Cousine"
+
+  tasks:
+    - name: clone nerd fonts 
+      ansible.builtin.git:
+        repo: git@github.com:ryanoasis/nerd-fonts.git
+        dest: /tmp/nerd-fonts
+        force: true
+        version: master
+
+    - name: install fonts 
+      shell: cd /tmp/nerd-fonts && powershell.exe -ExecutionPolicy Bypass -File install.ps1 {{ font_name }}
+      register: result

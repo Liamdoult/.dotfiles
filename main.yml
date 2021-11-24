@@ -8,7 +8,10 @@
   include: python.yml
 
 - name: Setup Go 
-  include: golang.yml
+  include: golang/main.yml
 
 - name: Setup nvim 
   include: nvim/nvim.yml
+
+- name: Setup fonts 
+  include: fonts.yml
