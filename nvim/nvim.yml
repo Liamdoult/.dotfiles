@@ -20,6 +20,13 @@
          - doxygen
          - ripgrep
 
+    - name: remove neovim
+      become: true
+      become_user: root
+      file:
+        path: /tmp/neovim
+        state: absent
+
     - name: clone neovim
       ansible.builtin.git:
         repo: git@github.com:neovim/neovim.git
