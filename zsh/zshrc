@@ -119,6 +119,9 @@ alias ex="explorer.exe"
 alias ts="sh ~/.tmux/scripts/startDev.sh"
 alias tsk="tmux kill-session"
 
+# Work bindings
+alias wrps="cd /mnt/c/Users/liamdoult/source/repos"
+
 export GOROOT=~/go
 export GOPATH=$HOME/.goinstalls
 export PATH="$PATH:$GOROOT/bin"
