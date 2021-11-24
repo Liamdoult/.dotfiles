@@ -24,6 +24,7 @@
       ansible.builtin.git:
         repo: git@github.com:neovim/neovim.git
         dest: /tmp/neovim
+        force: true
         version: release-0.5
 
     - name: build nvim
