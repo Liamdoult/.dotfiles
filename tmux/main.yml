@@ -1,6 +1,6 @@
 - hosts: localhost
   tasks:
-    - name: install zsh 
+    - name: install tmux 
       become: true
       become_user: root
       apt:
