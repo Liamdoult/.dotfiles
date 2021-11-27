@@ -40,5 +40,22 @@
         dest: /tmp/
 
     - name: install nuget cred provider plugin
-      shell: /tmp/install-artificates-credprovider.sh
+      become: true
+      become_user: root
+      shell: sudo sh /tmp/installcredprovider.sh
       register: result
+
+    - name: ansible create directory example
+      file:
+        path: ~/omnisharp
+        state: directory
+
+    - name: download omnisharp
+      get_url:
+        url: https://github.com/OmniSharp/omnisharp-roslyn/releases/latest/download/omnisharp-linux-x64.tar.gz
+        dest: /tmp/omnisharp.tar.gz
+
+    - name: extract omnisharp 
+      unarchive:
+        src: /tmp/omnisharp.tar.gz
+        dest: ~/omnisharp

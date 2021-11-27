@@ -43,6 +43,12 @@ set expandtab
 set ts=2 sw=2
 
 set number
+
+set spelllang=en
+set spell
+
+nnoremap <leader>er :lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
+
 " highlight ColorColumn ctermbg=red
 " set cc=80
 nnoremap <Leader><CR> :so ~/.config/nvim/init.vim<CR>
@@ -54,6 +60,12 @@ nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 
 lua << EOF
 require'lspconfig'.gopls.setup{}
+
+local home = vim.env["HOME"]
+local omnisharp_bin = home .. "/omnisharp/run"
+require'lspconfig'.omnisharp.setup{
+    cmd = { omnisharp_bin, "--languageserver" , "--hostPID", tostring(pid) };
+}
 
 require('telescope').setup {
   extensions = {
