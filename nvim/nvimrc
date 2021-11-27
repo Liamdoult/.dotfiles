@@ -47,7 +47,6 @@ set number
 set spelllang=en
 set spell
 
-nnoremap <leader>er :lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
 
 " highlight ColorColumn ctermbg=red
 " set cc=80
@@ -55,16 +54,24 @@ nnoremap <Leader><CR> :so ~/.config/nvim/init.vim<CR>
 nnoremap <Leader>ec :edit ~/.config/nvim/init.vim<CR>
 
 " Find files using Telescope command-line sugar.
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>ff <cmd>Telescope find_files<CR>
+nnoremap <leader>fg <cmd>Telescope live_grep<CR>
+
+" lsp bindings
+nnoremap <leader>gD <cmd>lua vim.lsp.buf.declaration()<CR>
+nnoremap <leader>gd <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap t <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <leader>R <cmd>lua vim.lsp.buf.rename()<CR>
+nnoremap <leader>er :lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
 
 lua << EOF
+
 require'lspconfig'.gopls.setup{}
 
 local home = vim.env["HOME"]
 local omnisharp_bin = home .. "/omnisharp/run"
 require'lspconfig'.omnisharp.setup{
-    cmd = { omnisharp_bin, "--languageserver" , "--hostPID", tostring(pid) };
+  cmd = { omnisharp_bin, "--languageserver" , "--hostPID", tostring(pid) };
 }
 
 require('telescope').setup {
