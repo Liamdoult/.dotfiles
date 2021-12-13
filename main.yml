@@ -18,3 +18,6 @@
 
 - name: Setup tmux
   include: tmux/main.yml
+
+- name: Setup Rust
+  include: rust/main.yml

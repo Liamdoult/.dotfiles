@@ -1,0 +1,35 @@
+# Rust windows installation via WSL.
+#
+# Created by Liam Doult on 13/12/2021
+#
+# Native operating system rust can perform faster by bypassing slow WSL
+# intermediary checks.
+#
+# Of course it also provides access to Rust directly from Windows.
+---
+- hosts: localhost
+  tasks:
+    - name: Load Windows default temp folder. 
+      shell: "powershell.exe -Command '(Get-Item Env:temp).Value' | xargs -d '\n' wslpath -a"
+      register: windows_temp_folder
+
+    - name: Download Windows Rust installer
+      get_url: 
+        url: "https://static.rust-lang.org/rustup/dist/i686-pc-windows-gnu/rustup-init.exe"
+        dest: "{{ windows_temp_folder.stdout }}/rustup-init.exe"
+
+    - name: Install Windows Rust
+      shell: "wslpath -w {{ windows_temp_folder.stdout }}/rustup-init.exe  | xargs -d '\n' powershell.exe -File Install-Rust-Windows.ps1"
+      register: result
+
+    # Log as the application does not seem to return failed state even if it
+    # has failed.
+    - debug: msg={{ result.stdout }}
+    - debug: msg={{ result.stderr }}
+
+    - name: Enable Rust nightly
+      shell: "powershell.exe -File Set-Rust-Nightly-Windows.ps1"
+      register: result
+
+
+
