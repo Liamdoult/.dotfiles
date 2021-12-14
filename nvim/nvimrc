@@ -47,7 +47,7 @@ if executable('rg')
   let g:ctrlp_working_path_mode = 'ra'
   " We are using windows Ripgrep for increased performance. This means we have
   " to convert the injected file paths to windows format and back. I tested
-  " and this is still faster than using find to retrieve files.
+  " and this is faster than using find to retrieve files.
   let g:ctrlp_user_command = 'wslpath -w %s | rg --files | xargs -L1 -d "\n" wslpath -u'
   let g:ctrlp_default_input = 0
   let g:ctrlp_use_caching = 1
