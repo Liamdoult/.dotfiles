@@ -21,3 +21,6 @@
 
 - name: Setup Rust
   include: rust/main.yml
+
+- name: Setup RipGrep
+  include: ripgrep/main.yml

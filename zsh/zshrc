@@ -108,7 +108,8 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-alias vim=nvim
+alias git="psc git"
+alias vim="nvim"
 alias psr="powershell.exe -File " 
 alias psc="powershell.exe -Command " 
 alias zshrl="source ~/.zshrc"

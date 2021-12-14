@@ -1,0 +1,55 @@
+# The main reason we want to install windows native rust is to be able to
+# compile rust applications natively so that we can execute them via
+# PowerShell.
+#
+# For example, running RipGrep from windows native can save > 300% (I believe
+# it is exponential, this is just the increase I got for one large project
+# using RipGrep native powershell version.
+
+- hosts: localhost
+  tasks:
+    - name: Load Windows default temp folder. 
+      shell: "powershell.exe -Command '(Get-Item Env:temp).Value' | xargs -d '\n' wslpath -a"
+      register: windows_temp_folder
+
+    - name: Clone RipGrep.
+      ansible.builtin.git:
+        repo: "https://github.com/BurntSushi/ripgrep"
+        dest: "{{ windows_temp_folder.stdout }}/ripgrep"
+        force: true
+
+    - name: Copy powershell build script.
+      ansible.builtin.copy:
+        src: "./Install-RipGrep-Windows.ps1"
+        dest: "{{ windows_temp_folder.stdout }}/ripgrep/"
+
+    - name: Build RipGrep via ps 
+      shell: "cd {{ windows_temp_folder.stdout }}/ripgrep && powershell.exe -File Install-RipGrep-Windows.ps1"
+      register: result
+
+    # Log as the application does not seem to return failed state even if it
+    # has failed.
+    - debug: msg={{ result.stdout }}
+    - debug: msg={{ result.stderr }}
+
+    - name: Test RipGrep build.
+      ansible.builtin.shell: "{{ windows_temp_folder.stdout }}/ripgrep/target/release/rg.exe --version"
+      register: result
+
+    - name: Install RipGrep
+      become: true
+      become_user: root
+      ansible.builtin.copy:
+        src: "{{ windows_temp_folder.stdout }}/ripgrep/target/release/rg.exe"
+        dest: "/usr/local/bin/"
+        mode: u=rwx,g=rx,o=rx
+
+    - name: Symbolic link rg to rg.exe
+      become: true
+      become_user: root
+      file:
+        src: "/usr/local/bin/rg.exe"
+        dest: "/usr/local/bin/rg"
+        state: link
+        mode: u=rwx,g=rx,o=rx
+

@@ -38,6 +38,14 @@ nnoremap <C-n> :NERDTreeToggle<CR>
 " Ctrl + p Configuration
 let g:ctrlp_map = "<leader>p"
 
+if executable('rg')
+  set grepprg=rg
+  let g:ctrlp_working_path_mode = 'ra'
+  let g:ctrlp_user_command = 'wslpath -w %s | rg --files | xargs -L1 -d "\n" wslpath -u'
+  let g:ctrlp_default_input = 0
+  let g:ctrlp_use_caching = 1
+endif
+
 " Other
 set expandtab
 set ts=2 sw=2
