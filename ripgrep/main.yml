@@ -1,11 +1,16 @@
-# The main reason we want to install windows native rust is to be able to
-# compile rust applications natively so that we can execute them via
-# PowerShell.
+# Ripgrep windows installation via WSL.
+#
+# Created by Liam Doult on 13/12/2021
+#
+# Native operating system Ripgrp can perform faster by bypassing slow WSL
+# intermediary file permissions and other wsl os checks.
+#
+# We then configure WSL to call Ripgrep directly to significantly increase
+# performance of Ripgrep.
 #
 # For example, running RipGrep from windows native can save > 300% (I believe
-# it is exponential, this is just the increase I got for one large project
+# it scales linearly, this is just the increase I got for one large project
 # using RipGrep native powershell version.
-
 - hosts: localhost
   tasks:
     - name: Load Windows default temp folder. 
