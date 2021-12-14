@@ -12,10 +12,14 @@ Plug 'https://github.com/mileszs/ack.vim'
 Plug 'neovim/nvim-lspconfig'
 
 Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '80cdb00b221f69348afc4fb4b701f51eb8dd3120'}
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 
 Plug 'kyazdani42/nvim-web-devicons'
+
+" Git Plugins
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 
 call plug#end()
 
@@ -53,14 +57,24 @@ endif
 set expandtab
 set ts=2 sw=2
 
+autocmd FileType cs setlocal shiftwidth=4 tabstop=4
+
 set number
 
 set spelllang=en
 set spell
 
+" Set the update time low so that gitgutter can update sooner
+" Sets swap write time too, so this could cause performance issues.
+set updatetime=100
 
-" highlight ColorColumn ctermbg=red
-" set cc=80
+" Git Commands
+nnoremap <leader>gdt :Gvdiffsplit<CR>
+nnoremap <leader>gdm :Gvdiffsplit master<CR>
+nnoremap <leader>gl :Gvdiffsplit master<CR>
+
+highlight ColorColumn ctermbg=red
+set cc=100
 nnoremap <Leader><CR> :so ~/.config/nvim/init.vim<CR>
 nnoremap <Leader>ec :edit ~/.config/nvim/init.vim<CR>
 
