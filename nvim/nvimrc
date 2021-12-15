@@ -21,6 +21,9 @@ Plug 'kyazdani42/nvim-web-devicons'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
+Plug 'nvim-lua/plenary.nvim' " don't forget to add this one if you don't have it yet!
+Plug 'ThePrimeagen/harpoon'
+
 call plug#end()
 
 syntax on
@@ -40,7 +43,7 @@ nnoremap <leader>l :wincmd l<CR>
 nnoremap <C-n> :NERDTreeToggle<CR>
 
 " Ctrl + p Configuration
-let g:ctrlp_map = "<leader>p"
+let g:ctrlp_map = "<C-p>"
 
 if executable('rg')
   set grepprg=rg
@@ -88,6 +91,38 @@ nnoremap <leader>gd <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap t <cmd>lua vim.lsp.buf.hover()<CR>
 nnoremap <leader>R <cmd>lua vim.lsp.buf.rename()<CR>
 nnoremap <leader>er :lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
+
+" Harpoon
+nnoremap <leader>p <cmd>lua require("harpoon.ui").toggle_quick_menu()<CR>
+nnoremap <leader>pl <cmd>lua require("harpoon.ui").toggle_quick_menu()<CR>
+nnoremap <leader>ps <cmd>lua require("harpoon.mark").add_file()<CR>
+
+nnoremap <leader>p1 <cmd>lua require("harpoon.ui").nav_file(1)<CR>
+nnoremap <leader>p2 <cmd>lua require("harpoon.ui").nav_file(2)<CR>
+nnoremap <leader>p3 <cmd>lua require("harpoon.ui").nav_file(3)<CR>
+nnoremap <leader>p4 <cmd>lua require("harpoon.ui").nav_file(4)<CR>
+nnoremap <leader>p5 <cmd>lua require("harpoon.ui").nav_file(5)<CR>
+nnoremap <leader>p6 <cmd>lua require("harpoon.ui").nav_file(6)<CR>
+nnoremap <leader>p7 <cmd>lua require("harpoon.ui").nav_file(7)<CR>
+nnoremap <leader>p8 <cmd>lua require("harpoon.ui").nav_file(8)<CR>
+nnoremap <leader>p9 <cmd>lua require("harpoon.ui").nav_file(9)<CR>
+nnoremap <leader>p0 <cmd>lua require("harpoon.ui").nav_file(10)<CR>
+
+nnoremap <leader>pt <cmd>lua require("harpoon.term").gotoTerminal(1)<CR>
+nnoremap <leader>pt1 <cmd>lua require("harpoon.term").gotoTerminal(1)<CR>
+nnoremap <leader>pt2 <cmd>lua require("harpoon.term").gotoTerminal(2)<CR>
+nnoremap <leader>pt3 <cmd>lua require("harpoon.term").gotoTerminal(3)<CR>
+nnoremap <leader>pt4 <cmd>lua require("harpoon.term").gotoTerminal(4)<CR>
+nnoremap <leader>pt5 <cmd>lua require("harpoon.term").gotoTerminal(5)<CR>
+nnoremap <leader>pt6 <cmd>lua require("harpoon.term").gotoTerminal(6)<CR>
+nnoremap <leader>pt7 <cmd>lua require("harpoon.term").gotoTerminal(7)<CR>
+nnoremap <leader>pt8 <cmd>lua require("harpoon.term").gotoTerminal(8)<CR>
+nnoremap <leader>pt9 <cmd>lua require("harpoon.term").gotoTerminal(9)<CR>
+nnoremap <leader>pt9 <cmd>lua require("harpoon.term").gotoTerminal(10)<CR>
+
+" Terminal configuration
+:tnoremap <Esc> <C-\><C-n>
+au TermOpen * setlocal nospell
 
 lua << EOF
 
