@@ -1,0 +1,24 @@
+- hosts: localhost
+  tasks:
+    - name: create temp folder
+      file:
+        path: /tmp/rust/ 
+        state: directory
+
+    - name: download rust install script
+      get_url:
+        url: https://sh.rustup.rs
+        dest: /tmp/rust/
+
+    - name: install rust 
+      shell: sh /tmp/rustup-init.sh -y 
+      register: result
+
+    - name: clone rust-analyzer 
+      ansible.builtin.git:
+        repo: git@github.com:rust-analyzer/rust-analyzer.git
+        dest: /tmp/rust/rust-analyzer
+
+    - name: build rust-analyzer
+      shell: cd /tmp/rust/rust-analyzer && cargo xtask install --server
+      register: result

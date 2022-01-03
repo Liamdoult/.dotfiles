@@ -126,6 +126,7 @@ au TermOpen * setlocal nospell
 lua << EOF
 
 require'lspconfig'.gopls.setup{}
+require'lspconfig'.rust_analyzer.setup{}
 
 local home = vim.env["HOME"]
 local omnisharp_bin = home .. "/omnisharp/run"
